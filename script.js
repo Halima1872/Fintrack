@@ -1,3 +1,14 @@
+let $blocks = $('.block-card');
+
+$('.filter-btn').on('click', e => {
+  let $btn = $(e.target).addClass('active');
+  $btn.siblings().removeClass('active');
+  
+  let selector = $btn.data('target');
+  $blocks.removeClass('active').filter(selector).addClass('active');
+});
+
+
 totalIncome= calculateCategory('income');
 newIncomeForm = document.getElementById("newIncomeForm");
 newIncomeForm.addEventListener("submit", IncomeEvent );
@@ -40,8 +51,9 @@ function addIncome(newIncome, source) {
         setStorageItem('incomeCategories', income);
     }else{
         setStorageItem('incomeCategories', [newIncomeObj]);
+        
     }
-    
+    location.reload()
 }
 
 function IncomeCategories() {

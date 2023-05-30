@@ -6,78 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
         <div id="menu">
-            <button class="nav" id="navIncome">Income</button>
-            <button class="nav" id="navExpense">Expense</button>
-            <button class="nav" id="navSummary">Summary</button>
-            <button class="nav" id="navInvestments">Investments</button>
+            <button class="filter-btn active" id="navHome" data-target="#block-1">Home</button>
+            <button class="filter-btn" id="navIncome" data-target="#block-2">Income</button>
+            <button class="filter-btn" id="navExpense">Expense</button>
+            <button class="filter-btn" id="navSummary">Summary</button>
         </div>
-        </div>
-        <div class="element-container">
-            <div class="income-container">
-                <div class="info">
-                    <div class="info-newIncome">
-                        <h3>Add new Income</h3>
-                        <form action="" id="newIncomeForm">
-                            
-                            <div class="newIncome-formData">
-                                <label for="incomeName">Income Source:</label>
-                                <select name="incomeName" id="IncomeSourceInput">
-                                    <option value="salary">Salary</option>
-                                </select>
-                            </div>
+    </div>
 
-                            <p>or Add new Source of Income</p>
-                            
-                            <div class="newIncome-formData">
-                                <label for="incomeName">Income Source:</label>
-                                <input type="text" name="incomeName" id="newIncomeSourceInput">
-                           
-                            <div class="newIncome-formData">
-                                <label for="incomeAmount">Income Amount:</label>
-                                <input type="number" name="incomeAmount" id="incomeAmount">
-                            </div>
-                            
-                        
-                            <input type="submit" value="Submit" />
-                        
-                        </form>
-
-
-                    </div>
-                    <div class="Display">
-                        <div class="info-IncomeChart">
-                            <div class="totalIncome">
-                                <table>
-                                    <tbody id="Incometablebody">
-                                        <tr>
-                                            <th>Total Income:</th>
-                                            <th><p id="incomeValue"></p></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="incomeChart">
-                                <canvas id="incomeChart"></canvas>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            
-
-        </div>
-
-
-
+    <div class="block-card active" id="block-1">
+        <h1>Welcome to the Finance Tracker!</h1>
     </div>
     
-    <script src="script.js"></script>
-    
+    <div class="block-card" id="block-2">
+        <div class="info-newIncome">
+            <h3>Add new Income</h3>
+            <form action="" id="newIncomeForm">
+                            
+                <div class="newIncome-formData">
+                    <label for="incomeName">Income Source:</label>
+                    <select name="incomeName" id="IncomeSourceInput">
+                        <option value="salary">Salary</option>
+                    </select>
+                </div>
 
+                <p>or Add new Source of Income</p>
+                                
+                <div class="newIncome-formData">
+                    <label for="incomeName">Income Source:</label>
+                    <input type="text" name="incomeName" id="newIncomeSourceInput">
+                </div>
+                            
+                <div class="newIncome-formData">
+                    <label for="incomeAmount">Income Amount:</label>
+                    <input type="number" name="incomeAmount" id="incomeAmount">
+                </div>
+
+                <div class="newIncome-formData">
+                    <input type="submit" value="Submit" />
+                </div>  
+
+            </form>         
+        </div>
+        
+        <div class="Display">
+            <div class="info-IncomeChart">
+                <div class="totalIncome">
+                    <table>
+                        <tbody id="Incometablebody">
+                            <tr>
+                                <th>Total Income:</th>
+                                <th><p id="incomeValue"></p></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="incomeChart">
+                    <canvas id="incomeChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
