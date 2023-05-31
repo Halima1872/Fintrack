@@ -14,7 +14,7 @@
         <div id="menu">
             <button class="filter-btn active" id="navHome" data-target="#block-1">Home</button>
             <button class="filter-btn" id="navIncome" data-target="#block-2">Income</button>
-            <button class="filter-btn" id="navExpense">Expense</button>
+            <button class="filter-btn" id="navExpense" data-target="#block-3">Expense</button>
             <button class="filter-btn" id="navSummary">Summary</button>
         </div>
     </div>
@@ -72,7 +72,52 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div class="block-card" id="block-3">
+        <div class="info-newExpense">
+            <h3>Add new Expense</h3>
+            <form action="" id="newExpenseForm">
+                            
+                <div class="newExpense-formData">
+                    <label for="expenseName">Expense Source:</label>
+                    <input type="text" name="expenseName" id="newExpenseSourceInput">
+                </div>
+                            
+                <div class="newExpense-formData">
+                    <label for="expenseAmount">Amount:</label>
+                    <input type="number" name="expenseAmount" id="expenseAmount">
+                </div>
+
+                <div class="newExpense-formData">
+                    <label for="expenseDate">Date:</label>
+                    <input type="date" name="expenseDate" id="expenseDate">
+                </div>
+
+                <div class="newExpense-formData">
+                    <input type="submit" value="Submit" />
+                </div>  
+            </form>         
+        </div>
+        
+        <div class="Display">
+            <div class="info-ExpenseChart">
+                <div class="totalExpense">
+                    <table>
+                        <tbody id="Expensetablebody">
+                            <tr>
+                                <th>Total Expense:</th>
+                                <th><p id="expenseValue"></p></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="expenseChart">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 <script src="script.js"></script>
 </body>
