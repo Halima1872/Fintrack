@@ -68,8 +68,6 @@ function Categories(category) {
     location.reload()
 }
 
-
-
 //Function to make donut chart for income
 function addIncomeChart(){
     const labels = []
