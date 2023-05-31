@@ -67,6 +67,9 @@ function Categories(category) {
     }
     location.reload()
 }
+
+
+
 //Function to make donut chart for income
 function addIncomeChart(){
     const labels = []
@@ -74,6 +77,7 @@ function addIncomeChart(){
     const tableBody = document.getElementById("Incometablebody");
     const incomeCategories = Categories('income')
     const incomeChart = document.getElementById("incomeChart").getContext('2d')
+  
     incomeCategories.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.income}</td></tr>`;
@@ -161,6 +165,7 @@ function addExpenseChart(){
   const tableBody = document.getElementById("Expensetablebody");
   const expenseCategories = Categories('expense')
   const expenseChart = document.getElementById("expenseChart").getContext('2d')
+
   expenseCategories.forEach(item => {
       const tr = document.createElement('tr');
       tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.expense}</td><td>${item.date}</td></tr>`;
