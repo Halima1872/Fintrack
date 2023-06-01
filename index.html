@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
     <div class="container">
@@ -83,8 +85,26 @@
 
     <div class="block-card" id="block-3">
         <div id="budget-form">
+            <h3>Set a budget!</h3>
             <form id="budget-form-element">
-              <label for="budget-input">Enter your budget for the month:</label>
+
+                <label for="month-select">Select Month:</label>
+                <select id="month-select">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            
+              <label for="budget-input">Enter your budget:</label>
               <input type="number" id="budget-input" max="" required>
               <button type="submit">Set Budget</button>
               <p>Note: Budget Amount should not exceed your Income!</p>
@@ -147,7 +167,7 @@
         <div class="info-newExpense">
             <h3>Summary:</h3>
             <!--Displaying total Income-->
-            <p id="incomeValuep">Total Monthly Income: ₹</p>
+            <p id="incomeValuep">Total Income: ₹</p>
             <p id="budgetValue">Budget set for the Month: ₹</p>
             <p id="expenseValuep">Overall Monthly Expenses: ₹</p>
                     

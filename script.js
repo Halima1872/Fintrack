@@ -10,7 +10,6 @@ $('.filter-btn').on('click', e => {
 });
 
 
-
 //Necessary Functions
 //Function to calculate the total of the category i.e income to be displayed
 function calculateCategory(category) {
@@ -40,6 +39,15 @@ function Categories(category) {
     if (getStorageItem(category + 'Categories'))
       return getStorageItem(category + 'Categories');
     return [];
+  }
+//Function to get month from month number
+function getMonthName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
+  
+    return date.toLocaleString('en-US', {
+      month: 'long',
+    });
   }
 
 //Income Page
@@ -136,6 +144,7 @@ function IncomeEvent(e){
 }
 addIncomeChart()
 
+
 //Budget Page
 const budgetInput = document.getElementById("budget-input");
 budgetInput.max = parseFloat(localStorage.getItem('totalIncome'));
@@ -151,12 +160,16 @@ budgetForm.addEventListener("submit", function(event) {
 
     const budgetInput = document.getElementById("budget-input");
     const budget = budgetInput.value;
+    const monthInput = document.getElementById("month-select");
+    const month = monthInput.value;
     // Save the budget to localStorage
     localStorage.setItem("budget", budget);
+    localStorage.setItem("month", month);
     // Hide the budget form
     budgetForm.style.display = "none";
     budgetMessage.style.display = "block";
-    budgetInfo.textContent = "Budget has been set to: ₹" + budget;
+    budgetInfo.textContent = `Budget has been set to: ₹${budget} for the month of ${getMonthName(localStorage.getItem("month"))}`;
+    location.reload()
   });
 
 editBudgetButton.addEventListener("click", function() {
@@ -171,16 +184,35 @@ if (storedBudget) {
     // Hide the budget form
     budgetForm.style.display = "none";
     budgetMessage.style.display = "block";
-    budgetInfo.textContent = "Budget has been set to: ₹" + storedBudget;
+    budgetInfo.textContent = `Budget has been set to: ₹${storedBudget} for the month of ${getMonthName(localStorage.getItem("month"))}`;
 }
 
+//Date Constraint
+  const ebtn = document.getElementById("navExpense");
+  ebtn.addEventListener("click", function() {
+    const dateInput = document.getElementById("expenseDate");
+    const storedMonth = localStorage.getItem("month");
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const selectedDate = new Date(currentYear, storedMonth - 1, 1);
+
+    const flatpickrOptions = {
+    dateFormat: "Y-m-d",
+    minDate: new Date(currentYear, storedMonth - 1, 1),
+    maxDate: new Date(currentYear, storedMonth, 0),
+    defaultDate: selectedDate,
+    disableMobile: true
+  };
+  flatpickr(dateInput, flatpickrOptions);
+  })
+
+
 //Expense Page
-totalExpense= calculateCategory('expense');
-localStorage.setItem('totalExpense', totalExpense);
+//totalExpense= calculateCategory('expense');
 newExpenseForm = document.getElementById("newExpenseForm");
 newExpenseForm.addEventListener("submit", ExpenseEvent );
 p = document.getElementById("expenseValue");
-p.append(totalExpense);
+p.append(localStorage.getItem('totalExpense'));
 
 function addExpense(newExpense, source,date) {
   const expense = getStorageItem('expenseCategories');
@@ -205,14 +237,22 @@ function addExpenseChart(){
   const tableBody = document.getElementById("Expensetablebody");
   const expenseCategories = Categories('expense')
   const expenseChart = document.getElementById("expenseChart").getContext('2d')
-
+  let totalExpense = 0;
+  
   expenseCategories.forEach(item => {
+      const date = new Date(item.date);
+      const month = date.getMonth() + 1;
+      if (month == localStorage.getItem("month")){
       const tr = document.createElement('tr');
       tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.expense}</td><td>${item.date}</td></tr>`;
       tableBody.insertAdjacentElement('beforeend',tr)
       labels.push(item.source)
       data.push(item.expense)
+      totalExpense += parseFloat(item.expense);
+      localStorage.setItem('totalExpense', totalExpense);
+      }
   });
+  
   const chartData = {
       labels : labels,
       datasets:[
@@ -272,7 +312,7 @@ incomep.append(localStorage.getItem('totalIncome'));
 budgetp = document.getElementById("budgetValue");
 budgetp.append(localStorage.getItem('budget'));
 expensep = document.getElementById("expenseValuep");
-expensep.append(localStorage.getItem('totalExpense'));
+expensep.append(localStorage.getItem('totalExpense')); 
 
 function addSummaryChart(){
 const summaryChart = document.getElementById("SummaryChart").getContext('2d')
@@ -281,7 +321,7 @@ const labels = ["TotalIncome","Budget","TotalExpense","Savings"];
 const data = {
   labels: labels,
   datasets: [{
-    label: 'Financial Summary',
+    label: `Financial Summary for the month of ${getMonthName(localStorage.getItem("month"))}`,
     data: [parseFloat(localStorage.getItem('totalIncome')), parseFloat(localStorage.getItem('budget')),parseFloat(localStorage.getItem('totalExpense')),Savings],
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
