@@ -16,12 +16,19 @@
             <button class="filter-btn active" id="navHome" data-target="#block-1">Home</button>
             <button class="filter-btn" id="navIncome" data-target="#block-2">Income</button>
             <button class="filter-btn" id="navExpense" data-target="#block-3">Expense</button>
-            <button class="filter-btn" id="navSummary">Summary</button>
+            <button class="filter-btn" id="navSummary" data-target="#block-4">Financial Summary</button>
         </div>
     </div>
 
     <div class="block-card active" id="block-1">
         <h1>Welcome to the Finance Tracker!</h1>
+        <p>Steps of working:</p>
+        <ul>
+            <li>Step-1 Add Your Sources of Income</li>
+            <li>Step-2 Set up your Monthly Budget</li>
+            <li>Step-3 Add Your Expenses as they come!</li>
+        </ul>
+        <button class="filter-btn" id="navIncome" data-target="#block-2">Get Started!</button>
     </div>
     
     <div class="block-card" id="block-2">
@@ -75,7 +82,22 @@
     </div>
 
     <div class="block-card" id="block-3">
-        <div class="info-newExpense">
+        <div id="budget-form">
+            <form id="budget-form-element">
+              <label for="budget-input">Enter your budget for the month:</label>
+              <input type="number" id="budget-input" max="" required>
+              <button type="submit">Set Budget</button>
+              <p>Note: Budget Amount should not exceed your Income!</p>
+            </form>
+          </div>
+        
+          <div id="budget-message" style="display: none;">
+            <h3 id="budget-info">Budget has been set!</h3>
+            <button id="edit-budget">Edit Budget</button>
+          </div>
+        
+          <div class="info-newExpense">
+            
             <h3>Add new Expense</h3>
             <form action="" id="newExpenseForm">
                             
@@ -86,8 +108,10 @@
                             
                 <div class="newExpense-formData">
                     <label for="expenseAmount">Amount:</label>
-                    <input type="number" name="expenseAmount" id="expenseAmount">
+                    <input type="number" name="expenseAmount" id="expenseAmount" min="1" max="">
                 </div>
+
+                <p>Note: Expense Amount should not exceed your budget!</p>
 
                 <div class="newExpense-formData">
                     <label for="expenseDate">Date:</label>
@@ -114,6 +138,25 @@
                 </div>
                 <div class="expenseChart">
                     <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block-card" id="block-4">
+        <div class="info-newExpense">
+            <h3>Summary:</h3>
+            <!--Displaying total Income-->
+            <p id="incomeValuep">Total Monthly Income: ₹</p>
+            <p id="budgetValue">Budget set for the Month: ₹</p>
+            <p id="expenseValuep">Overall Monthly Expenses: ₹</p>
+                    
+        </div>
+        
+        <div class="Display">
+            <div class="info-SummaryChart"> 
+                <div class="SummaryChart">
+                    <canvas id="SummaryChart"></canvas>
                 </div>
             </div>
         </div>

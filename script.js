@@ -1,3 +1,4 @@
+//Nav Bar
 let $blocks = $('.block-card');
 
 $('.filter-btn').on('click', e => {
@@ -9,18 +10,8 @@ $('.filter-btn').on('click', e => {
 });
 
 
-totalIncome= calculateCategory('income');
-newIncomeForm = document.getElementById("newIncomeForm");
-newIncomeForm.addEventListener("submit", IncomeEvent );
-p = document.getElementById("incomeValue");
-p.append(totalIncome);
 
-totalExpense= calculateCategory('expense');
-newExpenseForm = document.getElementById("newExpenseForm");
-newExpenseForm.addEventListener("submit", ExpenseEvent );
-p = document.getElementById("expenseValue");
-p.append(totalExpense);
-
+//Necessary Functions
 //Function to calculate the total of the category i.e income to be displayed
 function calculateCategory(category) {
     if(getStorageItem(category + 'Categories')){
@@ -44,14 +35,22 @@ function getStorageItem(item) {
         return undefined;
     }
 }
-
-//Function to add income
+//Function to get categories from localStorage
 function Categories(category) {
     if (getStorageItem(category + 'Categories'))
       return getStorageItem(category + 'Categories');
     return [];
   }
 
+//Income Page
+totalIncome= calculateCategory('income');
+localStorage.setItem('totalIncome', totalIncome);
+newIncomeForm = document.getElementById("newIncomeForm");
+newIncomeForm.addEventListener("submit", IncomeEvent );
+p = document.getElementById("incomeValue");
+p.append(totalIncome);
+
+//Function to add income
   function addIncome(newIncome, source) {
     const income = getStorageItem('incomeCategories');
     const newIncomeObj = {
@@ -120,7 +119,6 @@ function addIncomeChart(){
       };
       
     const chart1 = new Chart(incomeChart,config)
-    //location.reload()
 }
 
 function IncomeEvent(e){
@@ -136,8 +134,53 @@ function IncomeEvent(e){
 }
 
 }
-
 addIncomeChart()
+
+//Budget Page
+const budgetInput = document.getElementById("budget-input");
+budgetInput.max = parseFloat(localStorage.getItem('totalIncome'));
+const expensesInput = document.getElementById("expenseAmount");
+expensesInput.max = parseFloat(localStorage.getItem('budget'));
+const budgetForm = document.getElementById("budget-form-element");
+const budgetMessage = document.getElementById("budget-message");
+const budgetInfo = document.getElementById("budget-info");
+const editBudgetButton = document.getElementById("edit-budget");
+
+budgetForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const budgetInput = document.getElementById("budget-input");
+    const budget = budgetInput.value;
+    // Save the budget to localStorage
+    localStorage.setItem("budget", budget);
+    // Hide the budget form
+    budgetForm.style.display = "none";
+    budgetMessage.style.display = "block";
+    budgetInfo.textContent = "Budget has been set to: ₹" + budget;
+  });
+
+editBudgetButton.addEventListener("click", function() {
+    // Hide the budget message
+    budgetMessage.style.display = "none";
+    budgetForm.style.display = "block";
+  });
+
+  // Check if budget is already set in localStorage
+const storedBudget = localStorage.getItem("budget");
+if (storedBudget) {
+    // Hide the budget form
+    budgetForm.style.display = "none";
+    budgetMessage.style.display = "block";
+    budgetInfo.textContent = "Budget has been set to: ₹" + storedBudget;
+}
+
+//Expense Page
+totalExpense= calculateCategory('expense');
+localStorage.setItem('totalExpense', totalExpense);
+newExpenseForm = document.getElementById("newExpenseForm");
+newExpenseForm.addEventListener("submit", ExpenseEvent );
+p = document.getElementById("expenseValue");
+p.append(totalExpense);
 
 function addExpense(newExpense, source,date) {
   const expense = getStorageItem('expenseCategories');
@@ -154,7 +197,6 @@ function addExpense(newExpense, source,date) {
   }
   location.reload()
 }
-
 
 //Function to make donut chart for expense
 function addExpenseChart(){
@@ -223,3 +265,52 @@ function ExpenseEvent(e){
 }
 
 addExpenseChart()
+
+//Finiancial Summary Page
+incomep= document.getElementById("incomeValuep");
+incomep.append(localStorage.getItem('totalIncome'));
+budgetp = document.getElementById("budgetValue");
+budgetp.append(localStorage.getItem('budget'));
+expensep = document.getElementById("expenseValuep");
+expensep.append(localStorage.getItem('totalExpense'));
+
+function addSummaryChart(){
+const summaryChart = document.getElementById("SummaryChart").getContext('2d')
+const Savings = parseFloat(localStorage.getItem('totalIncome')) - parseFloat(localStorage.getItem('totalExpense'));
+const labels = ["TotalIncome","Budget","TotalExpense","Savings"];
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Financial Summary',
+    data: [parseFloat(localStorage.getItem('totalIncome')), parseFloat(localStorage.getItem('budget')),parseFloat(localStorage.getItem('totalExpense')),Savings],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+    ],
+    borderWidth: 1
+  }]
+};
+
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+const chart1 = new Chart(summaryChart,config)
+}
+
+addSummaryChart()
