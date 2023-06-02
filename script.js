@@ -75,6 +75,17 @@ p.append(totalIncome);
     location.reload()
 }
 
+function deleteIncome(newIncome, source) {
+  const income = getStorageItem('incomeCategories');
+  const newIncomeObj = {
+      income: newIncome,
+      source: source
+  };
+  income.pop([newIncomeObj]);
+  setStorageItem('incomeCategories', income);
+  location.reload()
+}
+
 //Function to make donut chart for income
 function addIncomeChart(){
     const labels = []
@@ -85,8 +96,12 @@ function addIncomeChart(){
   
     incomeCategories.forEach(item => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.income}</td></tr>`;
-        tableBody.insertAdjacentElement('beforeend',tr)
+        tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.income}</td><td><button class="deleteBtn_inc" id="deletetheincome">Delete</button></td></tr>`;
+        tableBody.insertAdjacentElement('beforeend', tr)
+        tr.addEventListener("click", (e) => {
+            const targetBtn = e.target;
+            deleteIncome(tr.children[1], tr.children[0]);
+        });
         labels.push(item.source)
         data.push(item.income)
     });
@@ -211,8 +226,8 @@ if (storedBudget) {
 //totalExpense= calculateCategory('expense');
 newExpenseForm = document.getElementById("newExpenseForm");
 newExpenseForm.addEventListener("submit", ExpenseEvent );
-p = document.getElementById("expenseValue");
-p.append(localStorage.getItem('totalExpense'));
+ep = document.getElementById("expenseValue");
+ep.append(localStorage.getItem('totalExpense'));
 
 function addExpense(newExpense, source,date) {
   const expense = getStorageItem('expenseCategories');
@@ -227,6 +242,20 @@ function addExpense(newExpense, source,date) {
   }else{
       setStorageItem('expenseCategories', [newExpenseObj]);
   }
+  location.reload()
+}
+function deleteExpense(newExpense, source, date) {
+  const expense = getStorageItem('expenseCategories');
+  const totalExpense = localStorage.getItem('totalExpense');
+  newtotalExpense = totalExpense - newExpense;
+  localStorage.setItem('totalExpense', newtotalExpense);
+  const newExpenseObj = {
+      expense: newExpense,
+      source: source,
+      date: date
+  };
+  expense.pop([newExpenseObj]);
+  setStorageItem('expenseCategories', expense);
   location.reload()
 }
 
@@ -244,8 +273,12 @@ function addExpenseChart(){
       const month = date.getMonth() + 1;
       if (month == localStorage.getItem("month")){
       const tr = document.createElement('tr');
-      tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.expense}</td><td>${item.date}</td></tr>`;
-      tableBody.insertAdjacentElement('beforeend',tr)
+      tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.expense}</td><td>${item.date}</td><td><button class="deleteBtn" id="deleteit">Delete</button></td></tr>`;
+      tableBody.insertAdjacentElement('beforeend', tr)
+      tr.addEventListener("click", (e) => { 
+          const targetBtn = e.target;
+          deleteExpense(tr.children[1], tr.children[0], tr.children[2]);
+        });
       labels.push(item.source)
       data.push(item.expense)
       totalExpense += parseFloat(item.expense);
