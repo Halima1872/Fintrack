@@ -10,6 +10,7 @@ $('.filter-btn').on('click', e => {
 });
 
 
+
 //Necessary Functions
 //Function to calculate the total of the category i.e income to be displayed
 function calculateCategory(category) {
@@ -86,6 +87,7 @@ function deleteIncome(newIncome, source) {
   location.reload()
 }
 
+
 //Function to make donut chart for income
 function addIncomeChart(){
     const labels = []
@@ -96,7 +98,7 @@ function addIncomeChart(){
   
     incomeCategories.forEach(item => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.income}</td><td><button class="deleteBtn_inc" id="deletetheincome">Delete</button></td></tr>`;
+        tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.income}</td><td><button class="btn btn-danger" id="deletetheincome">Delete</button></td></tr>`;
         tableBody.insertAdjacentElement('beforeend', tr)
         tr.addEventListener("click", (e) => {
             const targetBtn = e.target;
@@ -146,7 +148,7 @@ function addIncomeChart(){
 
 function IncomeEvent(e){
     e.preventDefault();
-    alert("Form submitted!");
+    
     const IncomeSourceInput = document.getElementById('IncomeSourceInput').value;
     const newIncomeSourceInput = document.getElementById('newIncomeSourceInput').value;
     const IncomeAmount = document.getElementById('incomeAmount').value;
@@ -273,7 +275,7 @@ function addExpenseChart(){
       const month = date.getMonth() + 1;
       if (month == localStorage.getItem("month")){
       const tr = document.createElement('tr');
-      tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.expense}</td><td>${item.date}</td><td><button class="deleteBtn" id="deleteit">Delete</button></td></tr>`;
+      tr.innerHTML = `<tr><td>-${item.source}</td><td>${item.expense}</td><td>${item.date}</td><td><button class="btn btn-danger" id="deleteit">Delete</button></td></tr>`;
       tableBody.insertAdjacentElement('beforeend', tr)
       tr.addEventListener("click", (e) => { 
           const targetBtn = e.target;
@@ -327,7 +329,6 @@ function addExpenseChart(){
 
 function ExpenseEvent(e){
   e.preventDefault();
-  alert("Form submitted!");
   const newExpenseSourceInput = document.getElementById('newExpenseSourceInput').value;
   const ExpenseAmount = document.getElementById('expenseAmount').value;
   const ExpenseDate = document.getElementById('expenseDate').value;
@@ -346,10 +347,14 @@ budgetp = document.getElementById("budgetValue");
 budgetp.append(localStorage.getItem('budget'));
 expensep = document.getElementById("expenseValuep");
 expensep.append(localStorage.getItem('totalExpense')); 
+savingsp = document.getElementById("savings");
+savingsp.append(localStorage.getItem('Savings'));
 
 function addSummaryChart(){
+
 const summaryChart = document.getElementById("SummaryChart").getContext('2d')
 const Savings = parseFloat(localStorage.getItem('totalIncome')) - parseFloat(localStorage.getItem('totalExpense'));
+localStorage.setItem('Savings', Savings);
 const labels = ["TotalIncome","Budget","TotalExpense","Savings"];
 const data = {
   labels: labels,
@@ -376,6 +381,7 @@ const config = {
   type: 'bar',
   data: data,
   options: {
+      responsive: true,
     scales: {
       y: {
         beginAtZero: true
