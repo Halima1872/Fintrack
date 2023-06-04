@@ -113,15 +113,18 @@ function addIncomeChart(){
             {
                 data: data,
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(1, 142, 203)',
-                    'rgb(106, 144, 204)',
-                    'rgb(1, 142, 203)',
-                    'rgb(102, 55, 221)',
+                  
+                    '#000900',
+                    '#003630',
+                    '#006360',
+                    '#00CFC0',
+                    '#00F3F0',
+                    '#07BEB8',
+                    '#3DCCC7',
+                    '#68D8D6',
+                    '#9CEAEF',
+                    '#C4FFF9',
+                    
                   ],
             }
         ]
@@ -134,10 +137,18 @@ function addIncomeChart(){
           plugins: {
             legend: {
               position: 'top',
+              labels: {
+                font: {
+                  size: 17
+                }
+              },
             },
             title: {
               display: true,
               text: 'Income Sources',
+              font: {
+                size: 20
+              }
             },
           },
         },
@@ -294,15 +305,16 @@ function addExpenseChart(){
           {
               data: data,
               backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(255, 159, 64)',
-                  'rgb(255, 205, 86)',
-                  'rgb(75, 192, 192)',
-                  'rgb(54, 162, 235)',
-                  'rgb(1, 142, 203)',
-                  'rgb(106, 144, 204)',
-                  'rgb(1, 142, 203)',
-                  'rgb(102, 55, 221)',
+                '#000900',
+                '#003630',
+                '#006360',
+                '#00CFC0',
+                '#00F3F0',
+                '#07BEB8',
+                '#3DCCC7',
+                '#68D8D6',
+                '#9CEAEF',
+                '#C4FFF9',
                 ],
           }
       ]
@@ -315,10 +327,19 @@ function addExpenseChart(){
         plugins: {
           legend: {
             position: 'top',
+            labels: {
+              font: {
+                size: 17
+              }
+            },
+            
           },
           title: {
             display: true,
             text: 'Expense Sources',
+            font: {
+              size: 20
+            }
           },
         },
       },
@@ -362,18 +383,24 @@ const data = {
     label: `Financial Summary for the month of ${getMonthName(localStorage.getItem("month"))}`,
     data: [parseFloat(localStorage.getItem('totalIncome')), parseFloat(localStorage.getItem('budget')),parseFloat(localStorage.getItem('totalExpense')),Savings],
     backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
+      
+                
+                '#b8f2e6',
+                '#00CFC0',
+                '#aed9e0',
+                '#07BEB8',
+                
     ],
     borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
+      
+                
+                '#b8f2e6',
+                '#00CFC0',
+                '#aed9e0',
+                '#07BEB8',
+                
     ],
-    borderWidth: 1
+    borderWidth: 3
   }]
 };
 
@@ -385,8 +412,17 @@ const config = {
     scales: {
       y: {
         beginAtZero: true
-      }
+      },
+      x: {
+        ticks: {
+            font: {
+                size: 20,
+                
+            }
+        }
     }
+    },
+    
   },
 };
 const chart1 = new Chart(summaryChart,config)

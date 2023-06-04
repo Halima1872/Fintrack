@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="logo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
+    <title>FinTrack</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -26,9 +27,15 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-light" id="navBar" >
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">FinTrack</a>
+    <nav class="navbar navbar-expand-lg bg-light " id="navBar" >
+        <div class="container-fluid " id="Nav">
+
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Bootstrap" width="30" height="30">
+              </a>
+
+
+            <a class="navbar-brand" href="#" style="color: #C5C6C7">FinTrack</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -38,17 +45,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active filter-btn active" id="navHome" data-target="#block-1"
-                            aria-current="page" href="#">Home</a>
+                        <a class="nav-link active filter-btn active" id="navHome" data-target="#block-1" aria-current="page" href="#" style="color: #C5C6C7;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link filter-btn" id="navIncome" data-target="#block-2" href="#">Income</a>
+                        <a class="nav-link filter-btn" id="navIncome" data-target="#block-2" href="#" style="color: #C5C6C7">Income</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link filter-btn" id="navExpense" data-target="#block-3" href="#">Expense</a>
+                        <a class="nav-link filter-btn" id="navExpense" data-target="#block-3" href="#" style="color: #C5C6C7">Expense</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link filter-btn" id="navSummary" data-target="#block-4" href="#">Financial
+                        <a class="nav-link filter-btn" id="navSummary" data-target="#block-4" href="#" style="color: #C5C6C7">Financial
                             Summary</a>
                     </li>
                 </ul>
@@ -58,7 +64,7 @@
 
     <div class="container">
         <div class="block-card active" id="block-1">
-            <div class="border border-2 rounded-4 px-5 py-5" id="home" >
+            <div class="border border-2 rounded-4 px-5 py-5 shadow-lg" id="home" >
                 <h1>Welcome to FinTrack!</h1>
                 <h4>Steps of working:</h4>
                 <ul class="steps">
@@ -75,7 +81,7 @@
             <div class="container mt-3">
                 <div class="row d-flex w-100 mb-3" style="max-width: 100%; min-height: 100px;">
                     <div class="h-50 align-self-center d-inline-block col-5 mx-auto " >
-                        <div class="card" style="background-color: #AFD3E2;">
+                        <div class="card shadow px-0" >
                             <div class="card-header card-title">
                                 <h5 class="card-title">Add new Income</h5>
                             </div>
@@ -117,12 +123,14 @@
                       <div class="h-25 d-inline-block col-6 mx-auto border border-3 rounded" >
                         <canvas id="incomeChart"></canvas>
                       </div>
+                      
                 </div>
+                <hr class="mt-5 mb-5" />
             </div>
 
                 <div class="row">
                     
-                    <div class="col-6 border border-3 rounded align-self-start offset-md-3 ">
+                    <div class="col-6 border shadow mb-2 border-3 rounded align-self-start offset-md-3" style="background-color: white;">
                         <p id="incomeValue"> Total Income: ₹</p>
                         <div class="info-IncomeTable">
                             <table class="table table-striped table-hover">
@@ -149,7 +157,7 @@
                     <div class="h-50 align-self-center d-inline-block col-5 mx-auto " >
 
                         <div class="row mb-3">
-                            <div class="card px-0">
+                            <div class="card px-0 shadow ">
                                 <div class="card-header  ">
                                     <h5 class="card-title">Set your Budget</h5>
                                 </div>
@@ -192,7 +200,7 @@
                         </div>
 
                         <div class="row">
-                        <div class="card px-0">
+                        <div class="card px-0 shadow">
                             <div class="card-header card-title">
                                 <h5 class="card-title">Add new Expense</h5>
                             </div>
@@ -230,7 +238,7 @@
 
                 <div class="row">
                     
-                    <div class="col-6 border border-3 rounded align-self-start offset-md-3 ">
+                    <div class="col-6 shadow border border-3 mb-2 rounded align-self-start offset-md-3 " style="background-color: white;" >
                         <p id="expenseValue"> Total Expense: ₹</p>
                         <div class="info-ExpenseTable">
                             <table class="table table-striped table-hover">
@@ -257,24 +265,24 @@
                 <div class="container text-center mt-5">
                     
                     <div class="row justify-content-around mb-3">
-                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold" id="incomeValuep">
+                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold shadow" id="incomeValuep" style="background-color: #b8f2e6;">
                             Total Income: ₹
                         </div>
-                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold" id="expenseValuep">
+                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold shadow" id="expenseValuep" style="background-color: #aed9e0;">
                             Total Expenses: ₹
                         </div>
                       </div>
 
                       <div class="row justify-content-around mb-5">
-                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold" id="budgetValue">
+                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold shadow" id="budgetValue" style="background-color: #00CFC0;" >
                             Budget: ₹
                         </div>
-                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold" id="savings">
+                        <div class="col-4 pt-3 pb-3 border border-4 rounded-pill fs-3 fw-bold shadow" id="savings" style="background-color: #07BEB8;">
                             Savings: ₹
                         </div>
                       </div>
                       <div class="row justify-content-around mb-3">
-                      <div class="col-7 border border-4 rounded" id="summaryChart"  >
+                      <div class="col-7 border border-4 rounded shadow" id="summaryChart" style="background-color: #e5e6e8;"  >
                                 <canvas id="SummaryChart" ></canvas>
                       </div>
                       </div>

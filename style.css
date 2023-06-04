@@ -7,10 +7,17 @@
     display: block;
 }
 body{
-  background-color: #F6F1F1;
+  background-color: #C5C6C7;
 }
 .bg-light{
-  background-color:#19A7CE !important;
+  background-color:#1F2833 !important;
+}
+hr{
+  top: 20px;
+        border: none;
+        height: 5px;
+  background: #1F2833;
+        margin-bottom: 50px;
 }
 
 #home {
