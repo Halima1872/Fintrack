@@ -1,4 +1,4 @@
-# ExpenseTracker 
+# Fintrack ExpenseTrackerApp 
 
 -About
 The Expense Tracker App is a simple yet powerful tool designed to help users keep track of their income, expenses, and set monthly budgets. 
